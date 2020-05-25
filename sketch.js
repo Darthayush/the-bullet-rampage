@@ -19,22 +19,41 @@ function draw() {
   background(0);  
   bullet.velocityX=speed; 
 
-  if(bullet.isTouching(wall)){ 
-    bullet.visible=false;
-   
-  damage=0.5*weight*speed*speed/thickness*thickness*thickness
- 
-    if(damage=12.43){
-    wall.shapeColor="red"
-  } 
-  
- else if (damage=12.68){
-     wall.shapeColor="green"
-   }
+  if(Collided(bullet,wall)){  
+  damage=0.5*weight*speed*speed/(thickness*thickness*thickness);
 
+  if(damage>10){
+    wall.shapeColor=color(225,0,0);
+  bullet.visible=false;
+  }
+
+  if(damage<10){
+  wall.shapeColor=color(0,225,0);
+  bullet.visible=false;
+  }
+
+  
+ 
 }
 
     bullet.collide(wall);  
     drawSprites();
 
 }
+
+function Collided(lbullet,lwall){
+
+bulletRightEdge=lbullet.x +lbullet.width;
+wallLeftEdge= lwall.x;
+ if(bulletRightEdge>=wallLeftEdge){
+     
+       return true
+ }
+return false;
+
+}
+
+
+
+
+
